@@ -1,5 +1,5 @@
 # Personalized Transfer of User Preferences for Cross-domain Recommendation (PTUPCDR)
-This is the official implementation of our paper **Personalized Transfer of User Preferences for Cross-domain Recommendation (PTUPCDR)**, which has been accepted by WSDM2022. [Paper](https://arxiv.org/pdf/2110.11154.pdf)
+This is the official implementation of our paper **Personalized Transfer of User Preferences for Cross-domain Recommendation (PTUPCDR)**, which has been accepted by WSDM2022. [Paper](https://dl.acm.org/doi/pdf/10.1145/3488560.3498392?casa_token=rIw_LyxVHwEAAAAA:8NqNOulu_0ML6iQB2f1tgqHrQMT8Okv0Cm7gZmWbCsCzd7b1ZIc-QlHXQ9b8Dj6NTBqnrc415tEi)
 
 Cold-start problem is still a very challenging problem in recommender systems. Fortunately, the interactions of the cold-start users in the auxiliary source domain can help cold-start recommendations in the target domain. How to transfer user's preferences from the source domain to the target domain, is the key issue in Cross-domain Recommendation (CDR) which is a promising solution to deal with the cold-start problem. Most existing methods model a common preference bridge to transfer preferences for all users. Intuitively, since preferences vary from user to user, the preference bridges of different users should be different. Along this line, we propose a novel framework named Personalized Transfer of User Preferences for Cross-domain Recommendation (PTUPCDR). Specifically, a meta network fed with users' characteristic embeddings is learned to generate personalized bridge functions to achieve personalized transfer of preferences for each user. To learn the meta network stably, we employ a task-oriented optimization procedure. With the meta-generated personalized bridge function, the user's preference embedding in the source domain can be transformed into the target domain, and the transformed user preference embedding can be utilized as the initial embedding for the cold-start user in the target domain.  Using large real-world datasets, we conduct extensive experiments to evaluate the effectiveness of PTUPCDR on both cold-start and warm-start stages.
 
@@ -41,8 +41,8 @@ Cold-start problem is still a very challenging problem in recommender systems. F
 ## Dataset
 
 We utilized the Amazon Reviews 5-score dataset. 
-To download the Amazon dataset, you can use the following link: [Amazon Reviews](http://jmcauley.ucsd.edu/data/amazon/links.html) or [Google Drive](https://drive.google.com/drive/folders/1BR4W4eN4nI8aoJw0kvT0_AUC-jD5NeY8?usp=sharing). 
-Download the three domains: Music, Movies, Books (5-scores), and then put the data in `./data/raw`.
+To download the Amazon dataset, you can use the following link: [Amazon Reviews](http://jmcauley.ucsd.edu/data/amazon/links.html).
+Download the three domains: [CDs and Vinyl](http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_CDs_and_Vinyl_5.json.gz), [Movies and TV](http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Movies_and_TV_5.json.gz), [Books](http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Books_5.json.gz) (5-scores), and then put the data in `./data/raw`.
 
 You can use the following command to preprocess the dataset. 
 The two-phase data preprocessing includes parsing the raw data and segmenting the mid data. 
@@ -88,16 +88,17 @@ the settings in `./code/config.json`. Note that this repository consists of our 
 ## Reference
 
 ```
-Zhu Y, Tang Z, Liu Y, et al. Personalized Transfer of User Preferences for Cross-domain Recommendation[C]. The 15th ACM International Conference on Web Search and Data Mining, 2022.
+Zhu, Yongchun, et al. "Personalized Transfer of User Preferences for Cross-domain Recommendation." Proceedings of the Fifteenth ACM International Conference on Web Search and Data Mining. 2022.
 ```
 
 or in bibtex style:
 
 ```
-@inproceedings{zhu2022ptupcdr,
+@inproceedings{zhu2022personalized,
   title={Personalized Transfer of User Preferences for Cross-domain Recommendation},
-  author={Zhu, Yongchun and Tang, Zhenwei and Liu, Yudan and Zhuang, Fuzhen, and Xie, Ruobing and Zhang, Xu and Lin, Leyu and He, Qing},
-  inproceedings={The 15th ACM International Conference on Web Search and Data Mining},
+  author={Zhu, Yongchun and Tang, Zhenwei and Liu, Yudan and Zhuang, Fuzhen and Xie, Ruobing and Zhang, Xu and Lin, Leyu and He, Qing},
+  booktitle={Proceedings of the Fifteenth ACM International Conference on Web Search and Data Mining},
+  pages={1507--1515},
   year={2022}
 }
 ```
