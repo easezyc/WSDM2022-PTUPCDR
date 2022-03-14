@@ -3,6 +3,15 @@ This is the official implementation of our paper **Personalized Transfer of User
 
 Cold-start problem is still a very challenging problem in recommender systems. Fortunately, the interactions of the cold-start users in the auxiliary source domain can help cold-start recommendations in the target domain. How to transfer user's preferences from the source domain to the target domain, is the key issue in Cross-domain Recommendation (CDR) which is a promising solution to deal with the cold-start problem. Most existing methods model a common preference bridge to transfer preferences for all users. Intuitively, since preferences vary from user to user, the preference bridges of different users should be different. Along this line, we propose a novel framework named Personalized Transfer of User Preferences for Cross-domain Recommendation (PTUPCDR). Specifically, a meta network fed with users' characteristic embeddings is learned to generate personalized bridge functions to achieve personalized transfer of preferences for each user. To learn the meta network stably, we employ a task-oriented optimization procedure. With the meta-generated personalized bridge function, the user's preference embedding in the source domain can be transformed into the target domain, and the transformed user preference embedding can be utilized as the initial embedding for the cold-start user in the target domain.  Using large real-world datasets, we conduct extensive experiments to evaluate the effectiveness of PTUPCDR on both cold-start and warm-start stages.
 
+## Introduction
+This repository provides the implementations of PTUPCDR and three popular baselines (TGTOnly, CMF, EMCDR):
+* TGTOnly：Train a MF model with the data of the target domain.
+* PLE: [Relational Learning via Collective Matrix Factorization Categories and Subject Descriptors](https://dl.acm.org/doi/pdf/10.1145/1401890.1401969?casa_token=S9kvmlp1bxEAAAAA:v96uHthvspO1ahgCZ1htH8sGl2voMvREqwXVYGf3X4WbvYXaD7tX1OsfXhx4k126HSOOtsbcbf9q) (KDD 2008)
+* EMCDR: [Cross-Domain Recommendation: An Embedding and Mapping Approach](https://www.ijcai.org/Proceedings/2017/0343.pdf) (IJCAI 2017)
+* PTUPCDR: [Personalized Transfer of User Preferences for Cross-domain Recommendation](https://dl.acm.org/doi/pdf/10.1145/3488560.3498392?casa_token=fMj33BdRcdoAAAAA:7iA-ORhh02jV0wY2bPg3keZVcDxAXt5q8hM-9JM8oKrTFj7caBd-HUOICs6gfrIV6tch8NpcYYOC) (WSDM 2022)
+
+
+
 ## Requirements
 
 - Python 3.6
