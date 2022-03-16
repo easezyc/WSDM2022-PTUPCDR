@@ -6,7 +6,7 @@ Cold-start problem is still a very challenging problem in recommender systems. F
 ## Introduction
 This repository provides the implementations of PTUPCDR and three popular baselines (TGTOnly, CMF, EMCDR):
 * TGTOnly：Train a MF model with the data of the target domain.
-* PLE: [Relational Learning via Collective Matrix Factorization Categories and Subject Descriptors](https://dl.acm.org/doi/pdf/10.1145/1401890.1401969?casa_token=S9kvmlp1bxEAAAAA:v96uHthvspO1ahgCZ1htH8sGl2voMvREqwXVYGf3X4WbvYXaD7tX1OsfXhx4k126HSOOtsbcbf9q) (KDD 2008)
+* CMF: [Relational Learning via Collective Matrix Factorization Categories and Subject Descriptors](https://dl.acm.org/doi/pdf/10.1145/1401890.1401969?casa_token=S9kvmlp1bxEAAAAA:v96uHthvspO1ahgCZ1htH8sGl2voMvREqwXVYGf3X4WbvYXaD7tX1OsfXhx4k126HSOOtsbcbf9q) (KDD 2008)
 * EMCDR: [Cross-Domain Recommendation: An Embedding and Mapping Approach](https://www.ijcai.org/Proceedings/2017/0343.pdf) (IJCAI 2017)
 * PTUPCDR: [Personalized Transfer of User Preferences for Cross-domain Recommendation](https://dl.acm.org/doi/pdf/10.1145/3488560.3498392?casa_token=fMj33BdRcdoAAAAA:7iA-ORhh02jV0wY2bPg3keZVcDxAXt5q8hM-9JM8oKrTFj7caBd-HUOICs6gfrIV6tch8NpcYYOC) (WSDM 2022)
 
