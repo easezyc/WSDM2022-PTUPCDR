@@ -61,6 +61,8 @@ The final data will be under `./data/ready`.
 python entry.py --process_data_mid 1 --process_data_ready 1
 ```
 
+`Processed Dataset`: Fortunately, I have found the processed datasets, and it is convenient to reproduce our results. [Google Drive](https://drive.google.com/file/d/1i-tTB3ffwsR31m1F7F7u-qnTbU63Pl35/view?usp=sharing), [Baidu Netdisk](https://pan.baidu.com/s/1G9Q86LnkN_XbDAn7pUYHvA?pwd=42ap)
+
 ## Run
 
 Parameter Configuration:
