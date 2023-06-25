@@ -194,19 +194,29 @@ class Run():
         # uid_list, user_rmse = [], []  # Lists to store UID and RMSE values
         user_rmse_dict = {}  # Dictionary to store UID and RMSE values
         user_ids = list()
+        # user_rmse = []
         with torch.no_grad():
             for X, y in tqdm.tqdm(data_loader, smoothing=0, mininterval=1.0):
                 pred = model(X, stage)
                 targets.extend(y.squeeze(1).tolist())
                 predicts.extend(pred.tolist())
                 user_ids.extend(X[:,0].tolist())
+
+                # # Calculate RMSE for each user
+                # user_targets = y.squeeze(1).tolist()
+                # user_predicts = pred.tolist()
+                # user_rmse.extend(np.sqrt(np.mean(np.square(np.array(user_targets) - np.array(user_predicts)))).tolist())
+
             
             targets = torch.tensor(targets).float()
             predicts = torch.tensor(predicts)
 
             # print("UserRMSE: ", user_rmse)
-            print("Length data_loader: ", len(targets))
-            print("length of user_rmse: ", len(set(user_ids)))
+            print("Length of Data_loaders: ", len(data_loader))
+            print("Length targets: ", len(targets))
+            print("length of user_ids: ", len(user_ids))
+            # print("length of user_rmse: ", len(user_rmse))
+            print("Length of unique user_ids", len(set(user_ids)))
             
             # Calculate RMSE for each user
             # user_ids = X[:, 0].unique().tolist() # Assuming UID is in the first column
@@ -215,15 +225,16 @@ class Run():
                 user_targets = targets[i]
                 user_predicts = predicts[i]
                 user_rmse = torch.sqrt(mse_loss(user_targets, user_predicts)).item()
-                user_rmse_dict[user_id] = user_rmse
+                user_mae = loss(user_targets, user_predicts).item()
+                user_rmse_dict[user_id] = [user_rmse,user_mae]
             
             # Store UID and RMSE values in a CSV file
-            filename = 'user_rmse_8_2.csv'
+            filename = 'user_rmse_8_2_trial_1.csv'
             with open(filename, 'w', newline='') as file:
                 writer = csv.writer(file)
-                writer.writerow(['UID', 'RMSE'])  # Write header
+                writer.writerow(['UID', 'RMSE','MAE'])  # Write header
                 for uid, rmse in user_rmse_dict.items():
-                    writer.writerow([uid, rmse])  # Write UID and RMSE values
+                    writer.writerow([uid, rmse[0], rmse[1]])  # Write UID and RMSE values
         
         return loss(targets, predicts).item(), torch.sqrt(mse_loss(targets, predicts)).item()
 
@@ -321,7 +332,6 @@ class Run():
 
     def CDR(self, model, data_src, data_map, data_meta, data_test,
             criterion, optimizer_src, optimizer_map, optimizer_meta):
-        rmse_values = []
         print('=====CDR Pretraining=====')
         # for i in range(self.epoch):
         #     self.train(data_src, model, criterion, optimizer_src, i, stage='train_src')
@@ -337,9 +347,9 @@ class Run():
         #     print('MAE: {} RMSE: {}'.format(mae, rmse))
         
         print('==========PTUPCDR==========')
-        for i in range(1):#self.epoch
+        for i in range(self.epoch):#self.epoch
             self.train(data_meta, model, criterion, optimizer_meta, i, stage='train_meta')
-            if i == 0:
+            if i == self.epoch-1:
                 mae, rmse = self.eval_mae_last_epochs(model, data_test, stage='test_meta')
             else:
                 mae, rmse = self.eval_mae(model, data_test, stage='test_meta')
@@ -347,32 +357,33 @@ class Run():
             print('MAE: {} RMSE: {}'.format(mae, rmse))
 
     def main(self):
-        model = self.get_model()
-        data_src, data_tgt, data_meta, data_map, data_aug, data_test = self.get_data()
-        # for X,y in data_test:
-        #     # print("X: ", X[:, 0])
-        #     # print("y: ", y)
-        #     user_ids = X[:, 0].unique().tolist()  # Assuming UID is in the first column
-        #     for user_id in user_ids:
-        #         user_indices = torch.where(X[:, 0] == user_id)[0]
+        # model = self.get_model()
+        # data_src, data_tgt, data_meta, data_map, data_aug, data_test = self.get_data()
 
-        # Read the CSV file
-        data = pd.read_csv(self.test_path)
+        # # # Read the dataset from the original CSV file
+        data = pd.read_csv('user_rmse_8_2_trial_1.csv')
 
-        # Get the unique values in the first column
-        unique_values = data.iloc[:, 0].unique()
-        print("UNIQUE VALUES: ", len(unique_values))
-        print("DataMeta: ", len(data_meta))
-        # Print the unique values
+        # # Sort the dataset by the 0th column
+        # sorted_data = data.sort_values(by=data.columns[0])
+        # # Get the unique values in the first column
+        # unique_values = data.iloc[:, 0].unique()
+
+        mean1 = data["RMSE"].mean()
+        mean2 = data["MAE"].mean()
+        print("mean1: ", mean1)
+        print("mean2: ", mean2)
+        # print("Data Values count: ", len(data))
+        # print("Unique Values:", len(unique_values))
+
+        # # # # Store the sorted dataset in a new CSV file
+        # # sorted_data.to_csv('sorted_user_rmse_8_2.csv', index=False)
+
         
-        # for value in unique_values:
-        #     print(value)
-
-        optimizer_src, optimizer_tgt, optimizer_meta, optimizer_aug, optimizer_map = self.get_optimizer(model)
-        criterion = torch.nn.MSELoss()
-        # self.TgtOnly(model, data_tgt, data_test, criterion, optimizer_tgt)
-        # self.DataAug(model, data_aug, data_test, criterion, optimizer_aug)
-        self.CDR(model, data_src, data_map, data_meta, data_test,
-                 criterion, optimizer_src, optimizer_map, optimizer_meta)
+        # optimizer_src, optimizer_tgt, optimizer_meta, optimizer_aug, optimizer_map = self.get_optimizer(model)
+        # criterion = torch.nn.MSELoss()
+        # # self.TgtOnly(model, data_tgt, data_test, criterion, optimizer_tgt)
+        # # self.DataAug(model, data_aug, data_test, criterion, optimizer_aug)
+        # self.CDR(model, data_src, data_map, data_meta, data_test,
+        #          criterion, optimizer_src, optimizer_map, optimizer_meta)
         
-        print(self.results)
+        # print(self.results)
