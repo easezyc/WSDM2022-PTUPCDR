@@ -15,7 +15,7 @@ def prepare(config_path):
     parser.add_argument('--task', default='1')
     parser.add_argument('--base_model', default='MF')
     parser.add_argument('--seed', type=int, default=2020)
-    parser.add_argument('--ratio', default=[0.8, 0.2])
+    parser.add_argument('--ratio', default=[0.2, 0.8])
     parser.add_argument('--gpu', default='0')
     parser.add_argument('--epoch', type=int, default=10)
     parser.add_argument('--lr', type=float, default=0.01)
