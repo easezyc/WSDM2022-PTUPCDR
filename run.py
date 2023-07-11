@@ -47,6 +47,8 @@ class Run():
                         'aug_mae': 10, 'aug_rmse': 10,
                         'emcdr_mae': 10, 'emcdr_rmse': 10,
                         'ptupcdr_mae': 10, 'ptupcdr_rmse': 10}
+        
+        
 
     def seq_extractor(self, x):
         x = x.rstrip(']').lstrip('[').split(', ')
@@ -210,9 +212,7 @@ class Run():
             print("Length of unique user_ids", len(set(user_ids)))
         
             # Calculate RMSE for each user
-            # user_ids = X[:, 0].unique().tolist() # Assuming UID is in the first column
             for i,user_id in enumerate(user_ids):
-                # user_indices = torch.where(X[:, 0] == user_id)[0]
                 user_targets = targets[i]
                 user_predicts = predicts[i]
                 if user_id not in user_targets_dict:
@@ -229,7 +229,7 @@ class Run():
 
             
             # Store UID and RMSE values in a CSV file
-            filename = 'user_rmse_8_2_trial_2.csv'
+            filename = 'user_rmse_8_2_T3_MF.csv'
             with open(filename, 'w', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow(['UID', 'MAE', 'RMSE'])  # Write header
@@ -295,6 +295,7 @@ class Run():
                 mae, rmse = self.eval_mae(model, data_test, stage='test_meta')
             self.update_results(mae, rmse, 'ptupcdr')
             print('MAE: {} RMSE: {}'.format(mae, rmse))
+
 
     def main(self):
         model = self.get_model()
