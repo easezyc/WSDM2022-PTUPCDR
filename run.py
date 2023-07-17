@@ -61,7 +61,7 @@ class Run():
 
     def read_log_data(self, path, batchsize, history=False):
         if not history:
-            cols = ['uid', 'iid', 'y']
+            cols = ['uid', 'iid', 'y', 'd1', 'd2']
             x_col = ['uid', 'iid']
             y_col = ['y']
             data = pd.read_csv(path, header=None)
@@ -76,7 +76,7 @@ class Run():
             return data_iter
         else:
             data = pd.read_csv(path, header=None)
-            cols = ['uid', 'iid', 'y', 'pos_seq']
+            cols = ['uid', 'iid', 'y', 'd1', 'd2', 'pos_seq']
             x_col = ['uid', 'iid']
             y_col = ['y']
             data.columns = cols
@@ -93,7 +93,7 @@ class Run():
             return data_iter
 
     def read_map_data(self):
-        cols = ['uid', 'iid', 'y', 'pos_seq']
+        cols = ['uid', 'iid', 'y', 'd1', 'd2', 'pos_seq']
         data = pd.read_csv(self.meta_path, header=None)
         data.columns = cols
         X = torch.tensor(data['uid'].unique(), dtype=torch.long)
@@ -106,7 +106,7 @@ class Run():
         return data_iter
 
     def read_aug_data(self):
-        cols_train = ['uid', 'iid', 'y']
+        cols_train = ['uid', 'iid', 'y', 'd1', 'd2']
         x_col = ['uid', 'iid']
         y_col = ['y']
         src = pd.read_csv(self.src_path, header=None)
@@ -229,7 +229,7 @@ class Run():
 
             
             # Store UID and RMSE values in a CSV file
-            filename = 'user_rmse_8_2_T3_MF.csv'
+            filename = 'rev_rmse_3_7_T3_MF.csv'
             with open(filename, 'w', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow(['UID', 'MAE', 'RMSE'])  # Write header
@@ -237,6 +237,28 @@ class Run():
                     writer.writerow([uid, rmse[0],rmse[1]])  # Write UID and RMSE values
         
         return loss(targets, predicts).item(), torch.sqrt(mse_loss(targets, predicts)).item()
+    
+    def getDataRevised(self):
+        print('========Reading data========')
+        data_src = self.read_log_data(self.src_path, self.batchsize_src)
+        print('src {} iter / batchsize = {} '.format(len(data_src), self.batchsize_src))
+
+        data_tgt = self.read_log_data(self.tgt_path, self.batchsize_tgt)
+        print('tgt {} iter / batchsize = {} '.format(len(data_tgt), self.batchsize_tgt))
+
+        data_meta = self.read_log_data(self.meta_path, self.batchsize_meta, history=True)
+        print('meta {} iter / batchsize = {} '.format(len(data_meta), self.batchsize_meta))
+
+        data_map = self.read_map_data()
+        print('map {} iter / batchsize = {} '.format(len(data_map), self.batchsize_map))
+
+        data_aug = self.read_aug_data()
+        print('aug {} iter / batchsize = {} '.format(len(data_aug), self.batchsize_aug))
+
+        data_test = self.read_log_data(self.test_path, self.batchsize_test, history=True)
+        print('test {} iter / batchsize = {} '.format(len(data_test), self.batchsize_test))
+
+        return data_src, data_tgt, data_meta, data_map, data_aug, data_test
 
     def train(self, data_loader, model, criterion, optimizer, epoch, stage, mapping=False):
         print('Training Epoch {}:'.format(epoch + 1))

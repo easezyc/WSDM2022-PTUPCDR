@@ -15,7 +15,7 @@ def prepare(config_path):
     parser.add_argument('--task', default='3')
     parser.add_argument('--base_model', default='MF')
     parser.add_argument('--seed', type=int, default=2020)
-    parser.add_argument('--ratio', default=[0.5, 0.5])
+    parser.add_argument('--ratio', default=[0.3, 0.7])
     parser.add_argument('--gpu', default='0')
     parser.add_argument('--epoch', type=int, default=10)
     parser.add_argument('--lr', type=float, default=0.01)
@@ -42,11 +42,11 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 
     if args.process_data_mid:
-        for dealing in ['Books', 'CDs_and_Vinyl', 'Movies_and_TV']:
+        for dealing in ['CDs_and_Vinyl', 'Electronics', 'Grocery_and_Gourmet_Food', 'Video_Games']:
             DataPreprocessingMid(config['root'], dealing).main()
     if args.process_data_ready:
-        for ratio in [[0.8, 0.2], [0.5, 0.5], [0.2, 0.8]]:
-            for task in ['1', '2', '3']:
+        for ratio in [[0.8, 0.2], [0.5, 0.5], [0.3, 0.7]]:
+            for task in ['1', '2', '3', '4']:
                 DataPreprocessingReady(config['root'], config['src_tgt_pairs'], task, ratio).main()
     print('task:{}; model:{}; ratio:{}; epoch:{}; lr:{}; gpu:{}; seed:{};'.
           format(args.task, args.base_model, args.ratio, args.epoch, args.lr, args.gpu, args.seed))

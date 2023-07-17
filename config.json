@@ -4,40 +4,51 @@
     "src_tgt_pairs":
         {
             "1":
-            {"src": "Movies_and_TV",
-            "tgt": "CDs_and_Vinyl",
-            "uid": 181187,
-            "iid": 114495,
+            {"src": "movie",
+            "tgt": "electronics",
+            "uid": 316363,
+            "iid": 113053,
             "batchsize_src": 256,
             "batchsize_tgt": 256,
-            "batchsize_meta": 128,
+            "batchsize_meta": 256,
             "batchsize_map": 64,
             "batchsize_test": 128
             },
             "2":
-            {"src": "Books",
-            "tgt": "Movies_and_TV",
-            "uid": 690240,
-            "iid": 418034,
-            "batchsize_src": 512,
-            "batchsize_tgt": 512,
-            "batchsize_meta": 512,
-            "batchsize_map": 128,
-            "batchsize_test": 256
+            {"src": "movie",
+            "tgt": "music",
+            "uid": 199218,
+            "iid": 114495,
+            "batchsize_src": 256,
+            "batchsize_tgt": 256,
+            "batchsize_meta": 256,
+            "batchsize_map": 64,
+            "batchsize_test": 128
             },
             "3":
-            {"src": "Books",
-            "tgt": "CDs_and_Vinyl",
-            "uid": 662188,
-            "iid": 432425,
-            "batchsize_src": 512,
-            "batchsize_tgt": 512,
-            "batchsize_meta": 512,
-            "batchsize_map": 128,
-            "batchsize_test": 256
+            {"src": "movie",
+            "tgt": "food",
+            "uid": 138641,
+            "iid": 58765,
+            "batchsize_src": 256,
+            "batchsize_tgt": 256,
+            "batchsize_meta": 256,
+            "batchsize_map": 64,
+            "batchsize_test": 128
+            },
+            "4":
+            {"src": "electronics",
+            "tgt": "games",
+            "uid": 216706,
+            "iid": 73673,
+            "batchsize_src": 256,
+            "batchsize_tgt": 256,
+            "batchsize_meta": 256,
+            "batchsize_map": 64,
+            "batchsize_test": 128
             }
         },
-    "emb_dim": 10,
+    "emb_dim": 16,
     "meta_dim": 50,
     "num_fields": 2,
     "wd": 0
