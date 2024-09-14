@@ -1,0 +1,21 @@
+Log Date and Time: 2024-09-14 16:00:52
+
+Folder /scratch/dmeher/llama_CS798_ResearchProject/User_Correlation_Project/Research-PTUPCDR/data exists.
+Folder /scratch/dmeher/llama_CS798_ResearchProject/User_Correlation_Project/Research-PTUPCDR/results_cs798 exists.
+Folder /scratch/dmeher/llama_CS798_ResearchProject/User_Correlation_Project/Research-PTUPCDR/results_llmasrec exists.
+Moved data to ../../../gitbackup/cs798_ptubackup/
+Moved results_cs798 to ../../../gitbackup/cs798_ptubackup/
+Moved results_llmasrec to ../../../gitbackup/cs798_ptubackup/
+Created readme.txt with instructions.
+Log Date and Time: 2024-09-14 16:03:08
+
+Error: Folder /scratch/dmeher/llama_CS798_ResearchProject/User_Correlation_Project/Research-PTUPCDR/data does not exist.
+Log Date and Time: 2024-09-14 16:09:42
+
+Folder /scratch/dmeher/llama_CS798_ResearchProject/User_Correlation_Project/Research-PTUPCDR/data exists.
+Folder /scratch/dmeher/llama_CS798_ResearchProject/User_Correlation_Project/Research-PTUPCDR/results_cs798 exists.
+Folder /scratch/dmeher/llama_CS798_ResearchProject/User_Correlation_Project/Research-PTUPCDR/results_llmasrec exists.
+Moved data to ../../../gitbackup/cs798_ptubackup/
+Moved results_cs798 to ../../../gitbackup/cs798_ptubackup/
+Moved results_llmasrec to ../../../gitbackup/cs798_ptubackup/
+Created readme.txt with instructions.
